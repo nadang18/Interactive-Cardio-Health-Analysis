@@ -38,6 +38,15 @@ function createScatterplot() {
       .attr("height", height) // Explicit height
       .style("overflow", "visible");
 
+  // Define clipping path
+  svg.append("defs").append("clipPath")
+      .attr("id", "clip")
+    .append("rect")
+      .attr("x", usableArea.left)
+      .attr("y", usableArea.top)
+      .attr("width", usableArea.width)
+      .attr("height", usableArea.height);
+
   // Define scales
   xScale = d3.scaleLinear()
       .domain(d3.extent(data, d => d.age))
@@ -67,7 +76,9 @@ function createScatterplot() {
       .attr("transform", `translate(${usableArea.left}, 0)`)
       .call(d3.axisLeft(yScale).tickFormat("").tickSize(-usableArea.width));
 
-  dots = svg.append("g").attr("class", "dots");
+  dots = svg.append("g")
+      .attr("class", "dots")
+      .attr("clip-path", "url(#clip)"); // Apply clipping path
 
   dots.selectAll("circle")
       .data(data)
