@@ -96,24 +96,15 @@ button {
 
 /* Reset Zoom (Mustard Yellow) */
 #reset-zoom {
-  background-color: #FFC107; /* Mustard Yellow */
+  background-color: #3498db; /* Mustard Yellow */
   color: black; /* Better contrast with yellow */
 }
 
 #reset-zoom:hover {
-  background-color: #E0A800; /* Darker shade on hover */
+  background-color: #2980b9; /* Darker shade on hover */
   transform: scale(1.05);
 }
 
-/* Enable Zoom (Blue) */
-#enable-zoom {
-  background-color: #3498db;
-}
-
-#enable-zoom:hover {
-  background-color: #2980b9;
-  transform: scale(1.05);
-}
 
 /* Enable Brush (Purple) */
 #enable-brush {
@@ -214,3 +205,54 @@ circle:hover {
 circle.selected {
   fill: #ff6b6b;
 }
+
+/* Filter Input & Button Container */
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* Label Styling */
+  .filter-container label {
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  /* Input Styling */
+  .filter-container input {
+    width: 100px;
+    padding: 8px;
+    font-size: 1.2vw;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    text-align: center;
+    outline: none;
+  }
+  
+  .filter-container input:focus {
+    border-color: #2980b9;
+  }
+  
+  /* Button Styling */
+  .filter-container button {
+    font-family: 'Lekton', sans-serif;
+    font-size: 1.2vw;
+    padding: 10px 15px;
+    border: none;
+    background-color: #3498db; /* Light Blue */
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    font-weight: bold;
+  }
+  
+  .filter-container button:hover {
+    background-color: #2980b9; /* Darker Shade */
+    transform: scale(1.05);
+  }

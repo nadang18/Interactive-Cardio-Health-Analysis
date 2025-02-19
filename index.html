@@ -18,18 +18,18 @@
         Click on the different option buttons to query for specific variables related to heart health to see the different results.
     </div>
 
-    <!-- Selected Dots Count -->
-    <label for="age-min">Age Range:</label>
-    <input type="number" id="age-min" placeholder="Min Age">
-    <input type="number" id="age-max" placeholder="Max Age">
-    
-    <label for="bmi-min">BMI Range:</label>
-    <input type="number" id="bmi-min" placeholder="Min BMI">
-    <input type="number" id="bmi-max" placeholder="Max BMI">
-    
-    <button id="apply-filter">Apply Filter</button>
-    <button id="reset-filter">Reset</button>
-    
+    <div class="filter-container">
+        <label for="age-min">Age Range:</label>
+        <input type="number" id="age-min" placeholder="Min">
+        <input type="number" id="age-max" placeholder="Max">
+        
+        <label for="bmi-min">BMI Range:</label>
+        <input type="number" id="bmi-min" placeholder="Min">
+        <input type="number" id="bmi-max" placeholder="Max">
+        
+        <button id="apply-filter">Apply Filter</button>
+        <button id="reset-filter">Reset</button>
+    </div>
     <div id="selection-count">No dots selected</div>
 
     <!-- Chart Container -->
