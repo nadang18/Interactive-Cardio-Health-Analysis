@@ -127,9 +127,7 @@ button {
 
 /* Tooltip Styling */
 #tooltip {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: none; /* Start as hidden */
     position: absolute;
     background-color: white;
     border: 1px solid black;
@@ -137,6 +135,13 @@ button {
     pointer-events: none;
     z-index: 10;
     font-size: 1vw;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+/* Show Tooltip when it has 'visible' class */
+#tooltip.visible {
+    display: block;
 }
 
 /* Data Points (Circles) */
