@@ -203,8 +203,8 @@ function enableZoom() {
 }
 
 function updateTooltipContent(d) {
-    document.getElementById('tooltip-age').textContent = `Age: ${d.age}`;
-    document.getElementById('tooltip-bmi').textContent = `BMI: ${d.bmi.toFixed(2)}`;
+    document.getElementById('tooltip-age').textContent = `${d.age}`;
+    document.getElementById('tooltip-bmi').textContent = `${d.bmi.toFixed(2)}`;
 }
 
 function updateTooltipPosition(event) {
