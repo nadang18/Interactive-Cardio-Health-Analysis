@@ -32,14 +32,13 @@ dl.info {
 }
 
 #tooltip {
-  position: flex;
-  background-color: white;
-  border: 1px solid black;
-  padding: 10px;
-  pointer-events: none;
-  z-index: 10;
-}
-
+    position: flex;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    pointer-events: none;
+    z-index: 10;
+=======
 body {
   margin: 0;
   padding: 0;
@@ -72,13 +71,14 @@ p {
 }
 
 .italic-text {
-  font-size: 1rem;
-  font-style: italic;
-  margin-top: -15px; 
+    font-size: 1rem;
+    font-style: italic;
+    margin-top: -25px;
 }
 
 .large-margin-top {
-  margin-top: 40px;
-  font-weight: 700;
-  color: #2c3e50;
+    margin-top: 40px;
+    font-weight: 700;
+    color: #2c3e50;
+>>>>>>> 5d348b44740ccf127e531aa0ed7ed0c8225d7d03
 }
