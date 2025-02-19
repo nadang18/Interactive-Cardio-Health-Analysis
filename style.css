@@ -96,23 +96,23 @@ button {
 
 /* Reset Zoom (Mustard Yellow) */
 #reset-zoom {
-  background-color: #3498db; /* Mustard Yellow */
-  color: black; /* Better contrast with yellow */
-}
-
+    background-color: #FFC107; /* Mustard Yellow */
+    color: black; /* High contrast text */
+  }
+  
 #reset-zoom:hover {
-  background-color: #2980b9; /* Darker shade on hover */
-  transform: scale(1.05);
-}
+    background-color: #E0A800; /* Darker mustard yellow */
+    transform: scale(1.05);
+  }
 
 
 /* Enable Brush (Purple) */
 #enable-brush {
-  background-color: #9b59b6;
+  background-color: #3498db;
 }
 
 #enable-brush:hover {
-  background-color: #8e44ad;
+  background-color: #2980b9;
   transform: scale(1.05);
 }
 
@@ -210,49 +210,53 @@ circle.selected {
 .filter-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 10px; /* Reduced spacing for compact layout */
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
-  }
-  
-  /* Label Styling */
-  .filter-container label {
-    font-size: 1.2vw;
+    margin-top: 15px; /* Slightly reduced */
+}
+
+/* Label Styling (Same Font as Everything Else) */
+.filter-container label {
+    font-family: 'Lekton', sans-serif; /* Ensure consistency */
+    font-size: 1vw; /* Match other text sizes */
     font-weight: bold;
     color: #2c3e50;
-  }
-  
-  /* Input Styling */
-  .filter-container input {
-    width: 100px;
-    padding: 8px;
-    font-size: 1.2vw;
-    border: 2px solid #3498db;
+}
+
+/* Input Styling */
+.filter-container input {
+    width: 70px; /* Slightly smaller */
+    padding: 4px; /* Reduced padding */
+    font-size: 0.9vw; /* Slightly smaller text */
+    border: 2px solid #90CAF9; /* Lighter Blue */
     border-radius: 5px;
     text-align: center;
     outline: none;
-  }
-  
-  .filter-container input:focus {
-    border-color: #2980b9;
-  }
-  
-  /* Button Styling */
-  .filter-container button {
+    background-color: #E3F2FD; /* Very light blue background */
+    color: #1565C0; /* Darker blue text for contrast */
+}
+
+.filter-container input:focus {
+    border-color: #64B5F6; /* Slightly darker blue when focused */
+    background-color: #BBDEFB; /* Soft highlight effect */
+}
+
+/* Button Styling (Slightly Smaller) */
+.filter-container button {
     font-family: 'Lekton', sans-serif;
-    font-size: 1.2vw;
-    padding: 10px 15px;
+    font-size: 0.9vw; /* Reduced size */
+    padding: 5px 10px; /* Smaller padding */
     border: none;
-    background-color: #3498db; /* Light Blue */
+    background-color: #64B5F6; /* Lighter Blue */
     color: white;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 6px; /* Slightly reduced border radius */
     transition: background-color 0.3s ease, transform 0.2s;
     font-weight: bold;
-  }
-  
-  .filter-container button:hover {
-    background-color: #2980b9; /* Darker Shade */
+}
+
+.filter-container button:hover {
+    background-color: #42A5F5; /* Slightly darker blue on hover */
     transform: scale(1.05);
-  }
+}
