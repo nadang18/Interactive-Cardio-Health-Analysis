@@ -165,9 +165,14 @@ function toggleBrush() {
     const button = d3.select("#toggle-brush");
 
     if (isBrushEnabled) {
-        svg.select(".brush").remove();
+        svg.select(".brush").remove(); // Remove the brush
+
+        // Re-enable zoom functionality
         svg.call(zoom);
-        
+
+        // Reset circle colors by removing the 'selected' class
+        d3.selectAll("circle").classed("selected", false);
+
         button.text("🖌️ Enable Brush")
               .style("background-color", "red")
               .style("color", "white");
@@ -177,7 +182,7 @@ function toggleBrush() {
         d3.select("body").style("cursor", "default");
     } else {
         svg.append("g").attr("class", "brush").call(brush);
-        svg.on(".zoom", null);
+        svg.on(".zoom", null); // Disable zoom when brushing
 
         button.text("🖌️ Disable Brush")
               .style("background-color", "green")
@@ -187,8 +192,10 @@ function toggleBrush() {
         d3.selectAll("circle").style("pointer-events", "none");
         d3.select("body").style("cursor", "crosshair");
     }
+    
     isBrushEnabled = !isBrushEnabled;
 }
+
 
 function enableZoom() {
     svg.call(zoom);
