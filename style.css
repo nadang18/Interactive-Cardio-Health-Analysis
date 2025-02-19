@@ -18,17 +18,22 @@ h1 {
     background: linear-gradient(135deg, #3498db, #9b59b6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 2px;
+    margin-top: 15px;
 }
 
 p {
     font-size: 1.2rem;
     color: #333;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .italic-text {
     font-style: italic;
+    margin-top: 0;
+}
+
+.large-margin-top {
+    margin-top: 40px;
 }
