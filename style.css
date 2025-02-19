@@ -127,7 +127,7 @@ button {
 
 /* Tooltip Styling */
 #tooltip {
-    display: none; /* Start as hidden */
+    display: visible; /* Start as hidden */
     position: absolute;
     background-color: white;
     border: 1px solid black;
