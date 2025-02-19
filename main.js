@@ -1,9 +1,8 @@
 let data = [];
 let xScale, yScale;
-let rScale;
 let brushSelection = null;
 let isBrushEnabled = false;
-let dots;
+let bars;
 let svg;
 let brush;
 let zoom;
@@ -11,16 +10,15 @@ let zoom;
 async function loadData() {
     data = await d3.csv('data/merged_subject_info.csv', (row) => ({
         ...row,
-        age: Number(row.Age),
-        bmi: Number(row['Body Mass Index (Kg/m2)']),
-        datetime: new Date(row.datetime),
+        age: Number(row['alcohol consumption (standard units)']),
+        cigarettes_per_day: Number(row['daily smoking (cigarretes/day)']) // Renamed here
     }));
 
     console.log("Data loaded:", data);
-    createScatterplot();
+    createBarChart();
 }
 
-function createScatterplot() {
+function createBarChart() {
     const width = 1000, height = 600;
     const margin = { top: 50, right: 50, bottom: 60, left: 80 };
 
@@ -49,13 +47,13 @@ function createScatterplot() {
         .attr("width", usableArea.width)
         .attr("height", usableArea.height);
 
-    xScale = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.age))
+    xScale = d3.scaleBand()
+        .domain(data.map(d => d.age))
         .range([usableArea.left, usableArea.right])
-        .nice();
+        .padding(0.1);
 
     yScale = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.bmi))
+        .domain([0, d3.max(data, d => d.cigarettes_per_day)])
         .range([usableArea.bottom, usableArea.top])
         .nice();
 
@@ -77,16 +75,17 @@ function createScatterplot() {
         .attr("transform", `translate(${usableArea.left}, 0)`)
         .call(d3.axisLeft(yScale).tickFormat("").tickSize(-usableArea.width));
 
-    dots = svg.append("g")
-        .attr("class", "dots")
+    bars = svg.append("g")
+        .attr("class", "bars")
         .attr("clip-path", "url(#clip)");
 
-    dots.selectAll("circle")
+    bars.selectAll("rect")
         .data(data)
-        .join("circle")
-        .attr("cx", d => xScale(d.age))
-        .attr("cy", d => yScale(d.bmi))
-        .attr("r", 5)
+        .join("rect")
+        .attr("x", d => xScale(d.age))
+        .attr("y", d => yScale(d.cigarettes_per_day))
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => usableArea.bottom - yScale(d.cigarettes_per_day))
         .attr("fill", "steelblue")
         .style("fill-opacity", 0.7)
         .on("mouseenter", function (event, d) {
@@ -128,38 +127,27 @@ function zoomed(event) {
     const newXScale = transform.rescaleX(xScale);
     const newYScale = transform.rescaleY(yScale);
 
-    svg.selectAll("circle")
-        .attr("cx", d => newXScale(d.age))
-        .attr("cy", d => newYScale(d.bmi));
+    svg.selectAll("rect")
+        .attr("x", d => newXScale(d.age))
+        .attr("y", d => newYScale(d.cigarettes_per_day))
+        .attr("width", newXScale.bandwidth())
+        .attr("height", d => usableArea.bottom - newYScale(d.cigarettes_per_day));
 
     svg.select(".x-axis").call(d3.axisBottom(newXScale));
     svg.select(".y-axis").call(d3.axisLeft(newYScale));
 }
-function updateSelection() {
-    // Update visual state of dots based on selection
-    d3.selectAll('circle').classed('selected', (d) => isCommitSelected(d));
-  }
 
-  function brushed(event) {
+function brushed(event) {
     brushSelection = event.selection;
-    
-    if (!brushSelection) {
-        // If no selection, reset all circles
-        dots.selectAll("circle").classed("selected", false);
-        return;
-    }
-
-    const [[x0, y0], [x1, y1]] = brushSelection;
-
-    dots.selectAll("circle").classed("selected", d => {
-        const cx = xScale(d.age);
-        const cy = yScale(d.bmi);
-        return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1;
-    });
-
+    updateSelection();
     updateSelectionCount();
+    updateLanguageBreakdown();
 }
 
+function enableZoom() {
+    svg.call(zoom);
+    svg.select(".brush").remove();
+}
 
 function toggleBrush() {
     const button = d3.select("#toggle-brush");
@@ -170,15 +158,15 @@ function toggleBrush() {
         // Re-enable zoom functionality
         svg.call(zoom);
 
-        // Reset circle colors by removing the 'selected' class
-        d3.selectAll("circle").classed("selected", false);
+        // Reset bar colors by removing the 'selected' class
+        d3.selectAll("rect").classed("selected", false);
 
         button.text("🖌️ Enable Brush")
               .style("background-color", "red")
               .style("color", "white");
 
         svg.style("cursor", "default");
-        d3.selectAll("circle").style("pointer-events", "auto");
+        d3.selectAll("rect").style("pointer-events", "auto");
         d3.select("body").style("cursor", "default");
     } else {
         svg.append("g").attr("class", "brush").call(brush);
@@ -189,22 +177,16 @@ function toggleBrush() {
               .style("color", "white");
 
         svg.style("cursor", "crosshair");
-        d3.selectAll("circle").style("pointer-events", "none");
+        d3.selectAll("rect").style("pointer-events", "none");
         d3.select("body").style("cursor", "crosshair");
     }
     
     isBrushEnabled = !isBrushEnabled;
 }
 
-
-function enableZoom() {
-    svg.call(zoom);
-    svg.select(".brush").remove();
-}
-
 function updateTooltipContent(d) {
     document.getElementById('tooltip-age').textContent = `${d.age}`;
-    document.getElementById('tooltip-bmi').textContent = `${d.bmi.toFixed(2)}`;
+    document.getElementById('tooltip-bmi').textContent = `${d.cigarettes_per_day.toFixed(2)}`;
 }
 
 function updateTooltipPosition(event) {
@@ -224,7 +206,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         .style("color", "white");
 });
 
-
 //FILTER// Function to apply both Age & BMI filters as a range
 function applyFilters() {
     const minAge = parseFloat(document.getElementById("age-min").value);
@@ -235,11 +216,11 @@ function applyFilters() {
     // Filter data based on input values (ignoring empty fields)
     const filteredData = data.filter(d =>
         (isNaN(minAge) || d.age >= minAge) && (isNaN(maxAge) || d.age <= maxAge) &&
-        (isNaN(minBMI) || d.bmi >= minBMI) && (isNaN(maxBMI) || d.bmi <= maxBMI)
+        (isNaN(minBMI) || d.cigarettes_per_day >= minBMI) && (isNaN(maxBMI) || d.cigarettes_per_day <= maxBMI)
     );
 
-    // Update scatterplot with filtered data
-    updateScatterplot(filteredData);
+    // Update bar chart with filtered data
+    updateBarChart(filteredData);
 }
 
 // Function to reset both filters
@@ -248,26 +229,26 @@ function resetFilters() {
     document.getElementById("age-max").value = "";
     document.getElementById("bmi-min").value = "";
     document.getElementById("bmi-max").value = "";
-    updateScatterplot(data); // Show all data again
+    updateBarChart(data); // Show all data again
 }
 
-// Function to update scatterplot dynamically
-function updateScatterplot(filteredData) {
-    dots.selectAll("circle")
+// Function to update bar chart dynamically
+function updateBarChart(filteredData) {
+    bars.selectAll("rect")
         .data(filteredData, d => d.age) // Bind new filtered data
         .join(
-            enter => enter.append("circle")
-                .attr("cx", d => xScale(d.age))
-                .attr("cy", d => yScale(d.bmi))
-                .attr("r", 5)
+            enter => enter.append("rect")
+                .attr("x", d => xScale(d.age))
+                .attr("y", d => yScale(d.cigarettes_per_day))
+                .attr("width", xScale.bandwidth())
+                .attr("height", d => usableArea.bottom - yScale(d.cigarettes_per_day))
                 .attr("fill", "steelblue")
                 .style("fill-opacity", 0.7),
-            update => update, // Keep existing circles
-            exit => exit.remove() // Remove circles not in new dataset
+            update => update, // Keep existing bars
+            exit => exit.remove() // Remove bars not in new dataset
         );
 }
 
 // Attach event listeners to buttons
 document.getElementById("apply-filter").addEventListener("click", applyFilters);
 document.getElementById("reset-filter").addEventListener("click", resetFilters);
-
