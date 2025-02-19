@@ -176,7 +176,7 @@ function updateTooltipContent(d) {
     const countElement = document.getElementById('selection-count');
     countElement.textContent = `${
       selectedCommits.length || 'No'
-    } commits selected`;
+    } dots selected`;
   
     return selectedCommits;
   }
