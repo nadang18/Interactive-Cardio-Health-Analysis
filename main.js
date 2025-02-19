@@ -233,13 +233,13 @@ function updateTooltipContent(d) {
   document.addEventListener('DOMContentLoaded', async () => {
     await loadData();
   });
-=======
+
   const age = document.getElementById('tooltip-age');
   const bmi = document.getElementById('tooltip-bmi');
 
   age.textContent = `Age: ${d.age}`;
   bmi.textContent = `BMI: ${d.bmi.toFixed(2)}`;
-}
+
 
 function updateTooltipPosition(event) {
   const tooltip = document.getElementById('tooltip');
@@ -256,11 +256,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadData();
 });
 
-<<<<<<< Updated upstream
-//LEMME SYD KEVIN
->>>>>>> 5a5f5e27fd67721a7ad3583635a72d4c8f80640f
-=======
-<<<<<<< HEAD
+
 
 // FOR TOOLTIP edit to make it work
 // function updateTooltipPosition(event) {
@@ -281,8 +277,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 //       dateStyle: 'full',
 //     });
 // }
-=======
-//LEMME SYD KEVIN
->>>>>>> 5a5f5e27fd67721a7ad3583635a72d4c8f80640f
->>>>>>> c95ca8d9e71fcfbc43e06637d02e60733180fbbe
->>>>>>> Stashed changes
+
