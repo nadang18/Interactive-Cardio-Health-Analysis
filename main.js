@@ -154,10 +154,10 @@ function enableBrush() {
 }
 
 function updateTooltipContent(d) {
-  const age = document.getElementById('tooltip-age');
+  const ages = document.getElementById('tooltip-age');
   const bmi = document.getElementById('tooltip-bmi');
 
-  age.textContent = `Age: ${d.age}`;
+  ages.textContent = `Age: ${d.age}`;
   bmi.textContent = `BMI: ${d.bmi.toFixed(2)}`;
 }
 
