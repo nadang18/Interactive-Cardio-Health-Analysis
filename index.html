@@ -18,18 +18,6 @@
         Click on the different option buttons to query for specific variables related to heart health to see the different results.
     </div>
 
-    <div class="filter-container">
-        <label for="age-min">Age Range:</label>
-        <input type="number" id="age-min" placeholder="Min">
-        <input type="number" id="age-max" placeholder="Max">
-        
-        <label for="bmi-min">BMI Range:</label>
-        <input type="number" id="bmi-min" placeholder="Min">
-        <input type="number" id="bmi-max" placeholder="Max">
-        
-        <button id="apply-filter">Apply Filter</button>
-        <button id="reset-filter">Reset</button>
-    </div>
     <div id="selection-count">No dots selected</div>
 
     <!-- Chart Container -->
@@ -46,9 +34,11 @@
 
     <dl id="tooltip" hidden>
         <dt>Age</dt>
-        <dd><a href="" id="tooltip-age" target="_blank"></a></dd>
-        <dt>BMI</dt>
+        <dd id="tooltip-age"></dd>
+        <dt>Alcohol</dt>
         <dd id="tooltip-bmi"></dd>
+        <dt>Death</dt>
+        <dd id="tooltip-death"></dd>
     </dl>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
