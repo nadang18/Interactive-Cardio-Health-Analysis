@@ -223,3 +223,47 @@ document.addEventListener('DOMContentLoaded', async () => {
         .style("background-color", "red") // Default color
         .style("color", "white");
 });
+
+
+//FILTER
+// Function to filter data based on BMI input
+function applyBMIFilter() {
+    const maxBMI = parseFloat(document.getElementById("bmi-filter").value);
+
+    if (isNaN(maxBMI)) {
+        alert("Please enter a valid number for BMI filtering.");
+        return;
+    }
+
+    // Filter data
+    const filteredData = data.filter(d => d.bmi <= maxBMI);
+
+    // Update scatterplot with filtered data
+    updateScatterplot(filteredData);
+}
+
+// Function to reset the filter
+function resetBMIFilter() {
+    document.getElementById("bmi-filter").value = ""; // Clear input field
+    updateScatterplot(data); // Show all data again
+}
+
+// Function to update scatterplot dynamically
+function updateScatterplot(filteredData) {
+    dots.selectAll("circle")
+        .data(filteredData, d => d.age) // Bind new filtered data
+        .join(
+            enter => enter.append("circle")
+                .attr("cx", d => xScale(d.age))
+                .attr("cy", d => yScale(d.bmi))
+                .attr("r", 5)
+                .attr("fill", "steelblue")
+                .style("fill-opacity", 0.7),
+            update => update, // Keep existing circles
+            exit => exit.remove() // Remove circles not in new dataset
+        );
+}
+
+// Attach event listeners to buttons
+document.getElementById("apply-filter").addEventListener("click", applyBMIFilter);
+document.getElementById("reset-filter").addEventListener("click", resetBMIFilter);
