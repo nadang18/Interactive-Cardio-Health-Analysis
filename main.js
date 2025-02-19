@@ -1,17 +1,16 @@
 let data = [];
 
 async function loadData() {
-    data = await d3.csv('merged_subject_info.csv', (row) => ({
+    data = await d3.csv('data/merged_subject_info.csv', (row) => ({
         ...row,
         line: Number(row.line),
         depth: Number(row.depth),
         length: Number(row.length),
         date: new Date(row.date + 'T00:00' + row.timezone),
         datetime: new Date(row.datetime),
-        
     }));
-    createScatterplot();
-    processMergedCSV();
+    const processedData = await processMergedCSV();
+    createScatterplot(processedData);
 }
 
 async function processMergedCSV() {
@@ -124,8 +123,7 @@ async function processMergedCSV() {
     return data;
 }
 
-
-function createScatterplot() {
+function createScatterplot(data) {
     const width = 1000, height = 600;
     const margin = { top: 50, right: 50, bottom: 60, left: 80 };
   
@@ -147,17 +145,18 @@ function createScatterplot() {
         .style("overflow", "visible");
   
     // Define scales
-   xScale = d3.scaleTime()
-        .domain(d3.extent(commits, d => d.datetime))
+    const xScale = d3.scaleLinear()
+        .domain(d3.extent(data, d => d.age))
         .range([usableArea.left, usableArea.right])
         .nice();
   
-  yScale = d3.scaleLinear()
-        .domain([0, 24])
-        .range([usableArea.bottom, usableArea.top]);
+    const yScale = d3.scaleLinear()
+        .domain(d3.extent(data, d => d.bmi))
+        .range([usableArea.bottom, usableArea.top])
+        .nice();
   
     const xAxis = d3.axisBottom(xScale).ticks(10);
-    const yAxis = d3.axisLeft(yScale).tickFormat(d => `${d.toFixed(0)}:00`);
+    const yAxis = d3.axisLeft(yScale).ticks(10);
   
     svg.append("g")
         .attr("transform", `translate(0, ${usableArea.bottom})`)
@@ -172,40 +171,35 @@ function createScatterplot() {
         .attr("transform", `translate(${usableArea.left}, 0)`)
         .call(d3.axisLeft(yScale).tickFormat("").tickSize(-usableArea.width));
   
-    dots = svg.append("g").attr("class", "dots");
-  
-    const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
-  
-    rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 30]);
-  
-    const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+    const dots = svg.append("g").attr("class", "dots");
   
     dots.selectAll("circle")
-        .data(sortedCommits)
+        .data(data)
         .join("circle")
-        .attr("cx", d => xScale(d.datetime))
-        .attr("cy", d => yScale(d.hourFrac))
-        .attr("r", d => rScale(d.totalLines)) 
+        .attr("cx", d => xScale(d.age))
+        .attr("cy", d => yScale(d.bmi))
+        .attr("r", 5) 
         .attr("fill", "steelblue")
         .style("fill-opacity", 0.7)
-        .on("mouseenter", function (event, commit) {
+        .on("mouseenter", function (event, d) {
             d3.select(event.currentTarget).style("fill-opacity", 1); 
-
         })
         .on("mouseleave", function () {
             d3.select(event.currentTarget).style("fill-opacity", 0.7);
-       
         });
         
-        function brushSelector() {
-          const brush = d3.brush()
-              .extent([[usableArea.left, usableArea.top], [usableArea.right, usableArea.bottom]])
-              .on("start brush end", brushed);
+    function brushSelector() {
+        const brush = d3.brush()
+            .extent([[usableArea.left, usableArea.top], [usableArea.right, usableArea.bottom]])
+            .on("start brush end", brushed);
   
-          svg.append("g")
-              .attr("class", "brush")
-              .call(brush)
-              .lower(); 
-      }
-      brushSelector(); 
-  }
+        svg.append("g")
+            .attr("class", "brush")
+            .call(brush)
+            .lower(); 
+    }
+    brushSelector(); 
+}
+
+// Load data and create scatter plot
+loadData();
