@@ -30,10 +30,11 @@ p {
 }
 
 .italic-text {
+    font-size: 1rem;
     font-style: italic;
-    margin-top: 0;
+    margin-top: -20px;
 }
 
 .large-margin-top {
-    margin-top: 40px;
+    margin-top: 30px;
 }
