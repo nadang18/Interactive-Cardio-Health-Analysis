@@ -159,6 +159,13 @@ circle:hover {
     fill: #2c3e50;
 }
 
+#selection-count {
+    font-size: 1.4vw;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: center;
+    margin: 20px 0 10px; /* Adds spacing above and below */
+  }
 /* Responsive Layout */
 @media (max-width: 768px) {
   h1 {

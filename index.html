@@ -14,12 +14,14 @@
     
     <p class="italic-text">The MUSIC study was a prospective, multicenter, longitudinal research project aimed at identifying risk predictors for cardiac mortality and sudden cardiac death (SCD) in chronic heart failure (CHF) patients.</p>
 
-    <div></div>
-
-    <p class="large-margin-top">
+    <div class="large-margin-top">
         Click on the different option buttons to query for specific variables related to heart health to see the different results.
-    </p>
+    </div>
 
+    <!-- Selected Dots Count -->
+    <div id="selection-count">No dots selected</div>
+
+    <!-- Chart Container -->
     <div id="chart"></div>
 
     <!-- Flexbox Container for Buttons -->
@@ -30,8 +32,12 @@
     </div>
 
     <div id="stats"></div>
-    <div id="selection-count"></div>
     <dl id="language-breakdown"></dl>
+
+    <div id="tooltip" hidden>
+        <div id="tooltip-age"></div>
+        <div id="tooltip-bmi"></div>
+    </div>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="main.js"></script>
