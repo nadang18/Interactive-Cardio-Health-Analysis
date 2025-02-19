@@ -26,5 +26,9 @@ p {
     font-size: 1.2rem;
     color: #333;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 5px;
+}
+
+.italic-text {
+    font-style: italic;
 }
