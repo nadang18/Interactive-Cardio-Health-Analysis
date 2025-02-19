@@ -1,44 +1,6 @@
-circle {
-  transition: 200ms;
-  transform-origin: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Lekton:wght@400;700&display=swap');
 
-circle:hover {
-  transform: scale(1.5);
-  stroke: black;
-  stroke-width: 1px;
-}
-circle {
-  transition: 200ms;
-  transform-origin: center;
-  transform-box: fill-box;
-}
-
-circle:hover {
-  transform: scale(1.5);
-}
-
-dl.info[hidden]:not(:hover, :focus-within) {
-  opacity: 0;
-  visibility: hidden;
-}
-
-dl.info {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.5em;
-  transition-duration: 500ms;
-  transition-property: opacity, visibility;
-}
-
-#tooltip {
-    position: flex;
-    background-color: white;
-    border: 1px solid black;
-    padding: 10px;
-    pointer-events: none;
-    z-index: 10;
-}
+/* General Page Styling */
 body {
   margin: 0;
   padding: 0;
@@ -51,50 +13,167 @@ body {
   font-family: 'Lekton', sans-serif;
 }
 
-h1 {
-  font-size: 3rem;
-  font-weight: 700;
+/* Title Bar Styling */
+.title-container {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.3), rgba(155, 89, 182, 0.3)); /* Semi-transparent gradient */
+  padding: 20px 0;
   text-align: center;
-  color: #2c3e50;
-  background: linear-gradient(135deg, #3498db, #9b59b6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding: 2px;
-  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Title Styling */
+h1 {
+  font-size: 2.5vw; /* Responsive font size */
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(135deg, #3498db, #9b59b6); /* Gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+/* Paragraph Styling */
 p {
-  font-size: 1.2rem;
+  font-size: 1.2vw;
   color: #333;
   text-align: center;
   margin-top: 10px;
+  max-width: 80%;
+  flex-wrap: wrap;
 }
 
+/* Italic Text */
 .italic-text {
-    font-size: 1rem;
+    font-size: 1vw;
     font-style: italic;
-    margin-top: -25px;
+    margin-top: -10px;
 }
 
+/* Larger Margin Text */
 .large-margin-top {
     margin-top: 40px;
     font-weight: 700;
     color: #2c3e50;
 }
 
-/* Title bar behind the title */
-.title-container {
-  width: 100%;
-  background: linear-gradient(135deg, rgba(52, 152, 219, 0.3), rgba(155, 89, 182, 0.3)); /* Lower opacity */
-  padding: 20px 0;
-  text-align: center;
+/* Chart Container */
+#chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 60vh;
+  max-width: 1000px;
 }
 
+/* Flexbox Container for Buttons */
+.button-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-/* Styling the title */
-h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  color: white; /* Ensure text is visible */
-  margin: 0; /* Remove margins for perfect centering */
+/* Button Styling */
+button {
+  font-size: 1.2vw;
+  padding: 10px 15px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+/* Reset Zoom (Mustard Yellow) */
+#reset-zoom {
+  background-color: #FFC107; /* Mustard Yellow */
+  color: black; /* Better contrast with yellow */
+}
+
+#reset-zoom:hover {
+  background-color: #E0A800; /* Darker shade on hover */
+  transform: scale(1.05);
+}
+
+/* Enable Zoom (Blue) */
+#enable-zoom {
+  background-color: #3498db;
+}
+
+#enable-zoom:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+/* Enable Brush (Purple) */
+#enable-brush {
+  background-color: #9b59b6;
+}
+
+#enable-brush:hover {
+  background-color: #8e44ad;
+  transform: scale(1.05);
+}
+
+/* Tooltip Styling */
+#tooltip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    pointer-events: none;
+    z-index: 10;
+    font-size: 1vw;
+}
+
+/* Data Points (Circles) */
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(1.5);
+  stroke: black;
+  stroke-width: 1px;
+}
+
+/* Axis Styling */
+.x-axis text, .y-axis text {
+    font-size: 1.2vw;
+    font-family: 'Lekton', sans-serif;
+    fill: #2c3e50;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 4vw;
+  }
+
+  p {
+    font-size: 2.5vw;
+  }
+
+  button {
+    font-size: 2.5vw;
+    padding: 12px 18px;
+  }
+
+  #tooltip {
+    font-size: 2vw;
+  }
 }

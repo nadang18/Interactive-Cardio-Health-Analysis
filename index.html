@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="title-container">
-        <h1>How Does BMI Affects Cardiovascular Health?</h1>
+        <h1>Interactive Cardio Health</h1>
     </div>
     
     <p class="italic-text">Explore the factors that influence cardiovascular health.</p>
@@ -21,13 +21,19 @@
     </p>
 
     <div id="chart"></div>
-    <button id="reset-zoom">Reset Zoom</button>
-    <button id="enable-zoom">Enable Zoom</button>
-    <button id="enable-brush">Enable Brush</button>
+
+    <!-- Flexbox Container for Buttons -->
+    <div class="button-container">
+        <button id="reset-zoom">🔴 Reset Zoom</button>
+        <button id="enable-zoom">🔍 Enable Zoom</button>
+        <button id="enable-brush">🖌️ Enable Brush</button>
+    </div>
+
     <div id="tooltip" hidden>
         <div id="tooltip-age"></div>
         <div id="tooltip-bmi"></div>
     </div>
+    
     <div id="stats"></div>
     <div id="selection-count"></div>
     <dl id="language-breakdown"></dl>
