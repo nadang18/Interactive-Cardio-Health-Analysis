@@ -151,6 +151,53 @@ function createScatterplot() {
         .attr("fill", "black")
         .text("Alcohol Consumption (Standard Units)");
 }
+function updateScatterplot(filteredData = data) {
+    dots.selectAll("circle")
+        .data(filteredData, d => d.age)
+        .join(
+            enter => enter.append("circle")
+                .attr("cx", d => xScale(d.age))
+                .attr("cy", d => yScale(d.bmi))
+                .attr("r", 5)
+                .attr("fill", d => d.survival === "Survivor" ? "cyan" :
+                                 (d.survival === "Non-cardiac death" || 
+                                  d.survival === "SCD (Sudden Cardiac Death)" ||
+                                  d.survival === "Pump-failure death") ? "orange" : "gray")
+                .style("fill-opacity", 0.7),
+            update => update
+                .attr("fill", d => d.survival === "Survivor" ? "cyan" :
+                                 (d.survival === "Non-cardiac death" || 
+                                  d.survival === "SCD (Sudden Cardiac Death)" ||
+                                  d.survival === "Pump-failure death") ? "orange" : "gray"),
+            exit => exit.remove()
+        );
+}
+
+function filterDeaths() {
+    const selectedType = document.getElementById("death-filter").value;
+
+    if (selectedType === "All") {
+        createScatterplot();; // 🔹 Reset to full scatterplot (including survivors)
+        return;
+    }
+
+    // Filter only selected death type (remove Survivors)
+    const filteredData = data.filter(d => d.survival !== "Survivor" && d.survival === selectedType);
+
+    dots.selectAll("circle")
+        .data(filteredData, d => d.age) // Bind only the filtered data (no survivors)
+        .join(
+            enter => enter.append("circle")
+                .attr("cx", d => xScale(d.age))
+                .attr("cy", d => yScale(d.bmi))
+                .attr("r", 5)
+                .attr("fill", "purple") // 🔹 Keep only filtered deaths in purple
+                .style("fill-opacity", 0.7),
+            update => update
+                .attr("fill", "purple"),
+            exit => exit.remove() // 🔹 Remove survivors from the plot
+        );
+}
 
 function zoomed(event) {
     const transform = event.transform;
@@ -279,22 +326,29 @@ function resetBMIFilter() {
     updateScatterplot(data); // Show all data again
 }
 
-// Function to update scatterplot dynamically
-function updateScatterplot(filteredData) {
+function updateScatterplot(filteredData = data) {
     dots.selectAll("circle")
-        .data(filteredData, d => d.age) // Bind new filtered data
+        .data(filteredData, d => d.age)
         .join(
             enter => enter.append("circle")
                 .attr("cx", d => xScale(d.age))
-                .attr("cy", d => yScale(d.bmi))
+                .attr("cy", d => yScale(d.alcohol))
                 .attr("r", 5)
-                .attr("fill", "steelblue")
+                .attr("fill", d => d.survival === "Survivor" ? "cyan" :
+                                 (d.survival === "Non-cardiac death" || 
+                                  d.survival === "SCD (Sudden Cardiac Death)" ||
+                                  d.survival === "Pump-failure death") ? "orange" : "gray") // Default
                 .style("fill-opacity", 0.7),
-            update => update, // Keep existing circles
-            exit => exit.remove() // Remove circles not in new dataset
+            update => update
+                .attr("fill", d => d.survival === "Survivor" ? "cyan" :
+                                 (d.survival === "Non-cardiac death" || 
+                                  d.survival === "SCD (Sudden Cardiac Death)" ||
+                                  d.survival === "Pump-failure death") ? "orange" : "gray"),
+            exit => exit.remove()
         );
 }
 
-// Attach event listeners to buttons
-document.getElementById("apply-filter").addEventListener("click", applyBMIFilter);
-document.getElementById("reset-filter").addEventListener("click", resetBMIFilter);
+// Attach event listener to filter dropdown
+document.getElementById("death-filter").addEventListener("change", filterDeaths);
+
+
