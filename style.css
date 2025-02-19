@@ -191,9 +191,6 @@ circle:hover {
   }
 }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 .gridlines line {
   stroke: lightgray;
   stroke-opacity: 0.7;
@@ -217,15 +214,3 @@ circle:hover {
 circle.selected {
   fill: #ff6b6b;
 }
-=======
->>>>>>> Stashed changes
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-<<<<<<< Updated upstream
-  }
-=======
-  }
->>>>>>> 5eead6b4fbaf1b390847b47a6d086b967816fef6
->>>>>>> Stashed changes
