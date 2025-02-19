@@ -32,7 +32,7 @@ p {
 .italic-text {
     font-size: 1rem;
     font-style: italic;
-    margin-top: -15px; /* Moves text closer to header */
+    margin-top: -25px;
 }
 
 .large-margin-top {
