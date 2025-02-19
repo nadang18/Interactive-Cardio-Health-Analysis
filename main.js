@@ -256,5 +256,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadData();
 });
 
+<<<<<<< Updated upstream
 //LEMME SYD KEVIN
 >>>>>>> 5a5f5e27fd67721a7ad3583635a72d4c8f80640f
+=======
+<<<<<<< HEAD
+
+// FOR TOOLTIP edit to make it work
+// function updateTooltipPosition(event) {
+//   const tooltip = document.getElementById('commit-tooltip');
+//   tooltip.style.left = `${event.clientX}px`;
+//   tooltip.style.top = `${event.clientY}px`;
+// }
+
+// function updateTooltipContent(commit) {
+//     const link = document.getElementById('commit-link');
+//     const date = document.getElementById('commit-date');
+  
+//     if (Object.keys(commit).length === 0) return;
+  
+//     link.href = commit.url;
+//     link.textContent = commit.id;
+//     date.textContent = commit.datetime?.toLocaleString('en', {
+//       dateStyle: 'full',
+//     });
+// }
+=======
+//LEMME SYD KEVIN
+>>>>>>> 5a5f5e27fd67721a7ad3583635a72d4c8f80640f
+>>>>>>> c95ca8d9e71fcfbc43e06637d02e60733180fbbe
+>>>>>>> Stashed changes
