@@ -30,3 +30,12 @@ circle {
     transition-duration: 500ms;
     transition-property: opacity, visibility;      
   }
+
+#tooltip {
+    position: flex;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    pointer-events: none;
+    z-index: 10;
+}
