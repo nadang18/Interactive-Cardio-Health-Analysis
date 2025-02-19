@@ -225,26 +225,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-//FILTER
-// Function to filter data based on BMI input
-function applyBMIFilter() {
-    const maxBMI = parseFloat(document.getElementById("bmi-filter").value);
+//FILTER// Function to apply both Age & BMI filters as a range
+function applyFilters() {
+    const minAge = parseFloat(document.getElementById("age-min").value);
+    const maxAge = parseFloat(document.getElementById("age-max").value);
+    const minBMI = parseFloat(document.getElementById("bmi-min").value);
+    const maxBMI = parseFloat(document.getElementById("bmi-max").value);
 
-    if (isNaN(maxBMI)) {
-        alert("Please enter a valid number for BMI filtering.");
-        return;
-    }
-
-    // Filter data
-    const filteredData = data.filter(d => d.bmi <= maxBMI);
+    // Filter data based on input values (ignoring empty fields)
+    const filteredData = data.filter(d =>
+        (isNaN(minAge) || d.age >= minAge) && (isNaN(maxAge) || d.age <= maxAge) &&
+        (isNaN(minBMI) || d.bmi >= minBMI) && (isNaN(maxBMI) || d.bmi <= maxBMI)
+    );
 
     // Update scatterplot with filtered data
     updateScatterplot(filteredData);
 }
 
-// Function to reset the filter
-function resetBMIFilter() {
-    document.getElementById("bmi-filter").value = ""; // Clear input field
+// Function to reset both filters
+function resetFilters() {
+    document.getElementById("age-min").value = "";
+    document.getElementById("age-max").value = "";
+    document.getElementById("bmi-min").value = "";
+    document.getElementById("bmi-max").value = "";
     updateScatterplot(data); // Show all data again
 }
 
@@ -265,5 +268,6 @@ function updateScatterplot(filteredData) {
 }
 
 // Attach event listeners to buttons
-document.getElementById("apply-filter").addEventListener("click", applyBMIFilter);
-document.getElementById("reset-filter").addEventListener("click", resetBMIFilter);
+document.getElementById("apply-filter").addEventListener("click", applyFilters);
+document.getElementById("reset-filter").addEventListener("click", resetFilters);
+
