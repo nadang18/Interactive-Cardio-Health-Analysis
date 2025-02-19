@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 circle {
     transition: 200ms;
     transform-origin: center;
@@ -38,4 +39,47 @@ circle {
     padding: 10px;
     pointer-events: none;
     z-index: 10;
+=======
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    background-color: #f4f4f4;
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: #2c3e50;
+    background: linear-gradient(135deg, #3498db, #9b59b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 2px;
+    margin-top: 15px;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.italic-text {
+    font-size: 1rem;
+    font-style: italic;
+    margin-top: -25px;
+}
+
+.large-margin-top {
+    margin-top: 40px;
+    font-weight: 700;
+    color: #2c3e50;
+>>>>>>> 5d348b44740ccf127e531aa0ed7ed0c8225d7d03
 }
