@@ -123,27 +123,112 @@ function createScatterplot() {
   d3.select("#reset-zoom").on("click", () => {
     svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
   });
+  
+  function brushed(event) {
+    brushSelection = event.selection;
+    updateSelection();
+    updateSelectionCount();
+    updateLanguageBreakdown();
+  }
+
+  function brushSelector() {
+    const brush = d3.brush()
+        .extent([[usableArea.left, usableArea.top], [usableArea.right, usableArea.bottom]])
+        .on("start brush end", brushed);
+
+    svg.append("g")
+        .attr("class", "brush")
+        .call(brush)
+        .lower(); 
+  }
+  brushSelector(); 
 }
 
 function updateTooltipContent(d) {
-  const age = document.getElementById('tooltip-age');
-  const bmi = document.getElementById('tooltip-bmi');
-
-  age.textContent = `Age: ${d.age}`;
-  bmi.textContent = `BMI: ${d.bmi.toFixed(2)}`;
-}
-
-function updateTooltipPosition(event) {
-  const tooltip = document.getElementById('tooltip');
-  tooltip.style.left = `${event.clientX}px`;
-  tooltip.style.top = `${event.clientY}px`;
-}
-
-function updateTooltipVisibility(isVisible) {
-  const tooltip = document.getElementById('tooltip');
-  tooltip.hidden = !isVisible;
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadData();
-});
+    const age = document.getElementById('tooltip-age');
+    const bmi = document.getElementById('tooltip-bmi');
+  
+    age.textContent = `Age: ${d.age}`;
+    bmi.textContent = `BMI: ${d.bmi.toFixed(2)}`;
+  }
+  
+  function updateTooltipPosition(event) {
+    const tooltip = document.getElementById('tooltip');
+    tooltip.style.left = `${event.clientX}px`;
+    tooltip.style.top = `${event.clientY}px`;
+  }
+  
+  function updateTooltipVisibility(isVisible) {
+    const tooltip = document.getElementById('tooltip');
+    tooltip.hidden = !isVisible;
+  }
+  
+  function updateSelection() {
+    // Update visual state of dots based on selection
+    d3.selectAll('circle').classed('selected', (d) => isCommitSelected(d));
+  }
+  
+  function updateSelectionCount() {
+    const selectedCommits = brushSelection
+      ? data.filter(isCommitSelected)
+      : [];
+  
+    const countElement = document.getElementById('selection-count');
+    countElement.textContent = `${
+      selectedCommits.length || 'No'
+    } commits selected`;
+  
+    return selectedCommits;
+  }
+  
+  function updateLanguageBreakdown() {
+    const selectedCommits = brushSelection
+      ? data.filter(isCommitSelected)
+      : [];
+    const container = document.getElementById('language-breakdown');
+  
+    if (selectedCommits.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+    const requiredCommits = selectedCommits.length ? selectedCommits : data;
+    const lines = requiredCommits.flatMap((d) => d.lines);
+  
+    // Use d3.rollup to count lines per language
+    const breakdown = d3.rollup(
+      lines,
+      (v) => v.length,
+      (d) => d.type
+    );
+  
+    // Update DOM with breakdown
+    container.innerHTML = '';
+  
+    for (const [language, count] of breakdown) {
+      const proportion = count / lines.length;
+      const formatted = d3.format('.1~%')(proportion);
+  
+      container.innerHTML += `
+              <dt>${language}</dt>
+              <dd>${count} lines (${formatted})</dd>
+          `;
+    }
+  
+    return breakdown;
+  }
+  
+  function isCommitSelected(commit) {
+    if (!brushSelection) {
+      return false;
+    }
+  
+    const [[x0, y0], [x1, y1]] = brushSelection; // Get bounds of selection
+    const x = xScale(commit.age);
+    const y = yScale(commit.bmi);
+  
+    return x >= x0 && x <= x1 && y >= y0 && y <= y1;
+  }
+  
+  document.addEventListener('DOMContentLoaded', async () => {
+    await loadData();
+  });
