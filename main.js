@@ -135,13 +135,31 @@ function zoomed(event) {
     svg.select(".x-axis").call(d3.axisBottom(newXScale));
     svg.select(".y-axis").call(d3.axisLeft(newYScale));
 }
+function updateSelection() {
+    // Update visual state of dots based on selection
+    d3.selectAll('circle').classed('selected', (d) => isCommitSelected(d));
+  }
 
-function brushed(event) {
+  function brushed(event) {
     brushSelection = event.selection;
-    updateSelection();
+    
+    if (!brushSelection) {
+        // If no selection, reset all circles
+        dots.selectAll("circle").classed("selected", false);
+        return;
+    }
+
+    const [[x0, y0], [x1, y1]] = brushSelection;
+
+    dots.selectAll("circle").classed("selected", d => {
+        const cx = xScale(d.age);
+        const cy = yScale(d.bmi);
+        return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1;
+    });
+
     updateSelectionCount();
-    updateLanguageBreakdown();
 }
+
 
 function toggleBrush() {
     const button = d3.select("#toggle-brush");
