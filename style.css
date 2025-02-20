@@ -63,14 +63,9 @@ p {
 
 /* Chart Container */
 #chart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 130%;
-  height: 80vh;
-  max-width: 1200px;
+  flex: 1 1 auto;
+  min-width: 300px; /* Ensures chart doesn't shrink too much */
 }
-
 /* Flexbox Container for Buttons */
 .button-container {
   display: flex;
@@ -261,9 +256,20 @@ circle.selected {
     transform: scale(1.05);
 }
 
+.chart-legend-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjusts space between chart and legend */
+}
+
 .legend-container {
   display: flex;
   flex-direction: column; /* Stack items vertically */
+  flex: 0 1 200px;
+  min-width: 150px;
   align-items: flex-start;
   gap: 8px;
   padding: 10px;
@@ -271,7 +277,7 @@ circle.selected {
   border-radius: 6px;
   background-color: white;
   position: absolute;
-  top: 790px; /* Adjust for positioning */
+  top: 600px; /* Adjust for positioning */
   right: 8%; /* Align to the right of the text */
 }
 

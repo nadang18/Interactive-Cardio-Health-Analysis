@@ -23,9 +23,10 @@
         <span class="line-break"></span>
         Scroll in or out to zoom through the scatter plot.
     </div>
-    
-    <div class="legend-container">
-        <div class="legend-title">Legend</div>
+    <div class="chart-legend-container">
+        <div id="chart"></div>
+        <div class="legend-container">
+            <div class="legend-title">Legend</div>
         <div class="legend-item">
             <span class="legend-dot red"></span> Death
         </div>
@@ -37,6 +38,7 @@
         </div>
         <div class="legend-item">
             <span class="legend-dot purple"></span> Alive (Brush Selected)
+        </div>
         </div>
     </div>
     
@@ -51,9 +53,6 @@
     </select>
 
     <div id="selection-count">No dots selected</div>
-
-    <!-- Chart Container -->
-    <div id="chart"></div>
 
     <!-- Flexbox Container for Buttons -->
     <div class="button-container">
