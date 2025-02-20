@@ -277,8 +277,8 @@ circle.selected {
   border-radius: 6px;
   background-color: white;
   position: absolute;
-  top: 600px; /* Adjust for positioning */
-  right: 8%; /* Align to the right of the text */
+  top: 800px; /* Adjust for positioning */
+  right: 100px; /* Align to the right of the text */
 }
 
 /* Legend Title */
