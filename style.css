@@ -271,8 +271,8 @@ circle.selected {
   border-radius: 6px;
   background-color: white;
   position: absolute;
-  top: 760px; /* Adjust for positioning */
-  right: 16%; /* Align to the right of the text */
+  top: 790px; /* Adjust for positioning */
+  right: 8%; /* Align to the right of the text */
 }
 
 /* Legend Title */
@@ -315,6 +315,8 @@ circle.selected {
   background-color: steelblue;
 }
 
+.legend-dot.black { background-color: black; }
+.legend-dot.purple { background-color: purple; }
 /* Apply consistent font and size */
 label[for="death-filter"], #death-filter {
   font-family: 'Open Sans', sans-serif; /* Matches the page's font */
