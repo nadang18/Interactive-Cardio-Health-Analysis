@@ -240,14 +240,20 @@ function updateSelection() {
 document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('toggle-brush');
 
+    // Set initial styles
+    button.style.transition = 'transform 0.2s ease, background-color 0.2s ease';
+    button.style.backgroundColor = isBrushEnabled ? 'green' : '#64B5F6'; // Initial color based on state
+
     // Event listener for mouse entering the button
     button.addEventListener('mouseover', () => {
-        button.style.backgroundColor = isBrushEnabled ? '#006400' : '#42A5F5'; // Dark green or darker blue
+        button.style.transform = 'scale(1.05)'; // Slightly enlarge the button
+        button.style.backgroundColor = isBrushEnabled ? '#006400' : '#42A5F5'; // Darker shades
     });
 
     // Event listener for mouse leaving the button
     button.addEventListener('mouseout', () => {
-        button.style.backgroundColor = isBrushEnabled ? 'green' : '#64B5F6'; // Green or light blue
+        button.style.transform = 'scale(1)'; // Reset to original size
+        button.style.backgroundColor = isBrushEnabled ? 'green' : '#64B5F6'; // Original colors
     });
 });
 
@@ -285,7 +291,6 @@ function toggleBrush() {
 
     isBrushEnabled = !isBrushEnabled;
 }
-
 function enableZoom() {
     svg.call(zoom);
     svg.select(".brush").remove();
