@@ -237,9 +237,22 @@ function updateSelection() {
     updateSelectionCount();
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('toggle-brush');
+
+    // Event listener for mouse entering the button
+    button.addEventListener('mouseover', () => {
+        button.style.backgroundColor = isBrushEnabled ? '#006400' : '#42A5F5'; // Dark green or darker blue
+    });
+
+    // Event listener for mouse leaving the button
+    button.addEventListener('mouseout', () => {
+        button.style.backgroundColor = isBrushEnabled ? 'green' : '#64B5F6'; // Green or light blue
+    });
+});
 
 function toggleBrush() {
-    const button = d3.select("#toggle-brush");
+    const button = document.getElementById('toggle-brush');
 
     if (isBrushEnabled) {
         svg.select(".brush").remove(); // Remove the brush
@@ -250,29 +263,28 @@ function toggleBrush() {
         // Reset circle colors by removing the 'selected' class
         d3.selectAll("circle").classed("selected", false);
 
-        button.text("🖌️ Enable Brush")
-              .style("background-color", "red")
-              .style("color", "white");
+        button.textContent = "🖌️ Enable Brush";
+        button.style.backgroundColor = '#64B5F6'; // Light blue
+        button.style.color = 'white';
 
-        svg.style("cursor", "default");
+        svg.style.cursor = "default";
         d3.selectAll("circle").style("pointer-events", "auto");
-        d3.select("body").style("cursor", "default");
+        document.body.style.cursor = "default";
     } else {
         svg.append("g").attr("class", "brush").call(brush);
         svg.on(".zoom", null); // Disable zoom when brushing
 
-        button.text("🖌️ Disable Brush")
-              .style("background-color", "green")
-              .style("color", "white");
+        button.textContent = "🖌️ Disable Brush";
+        button.style.backgroundColor = 'green';
+        button.style.color = 'white';
 
-        svg.style("cursor", "crosshair");
+        svg.style.cursor = "crosshair";
         d3.selectAll("circle").style("pointer-events", "none");
-        d3.select("body").style("cursor", "crosshair");
+        document.body.style.cursor = "crosshair";
     }
-    
+
     isBrushEnabled = !isBrushEnabled;
 }
-
 
 function enableZoom() {
     svg.call(zoom);
