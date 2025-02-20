@@ -310,7 +310,7 @@ function updateTooltipVisibility(isVisible) {
 document.addEventListener('DOMContentLoaded', async () => {
     await loadData();
     d3.select("#toggle-brush")
-        .style("background-color", "red") // Default color
+        .style("background-color", '#64B5F6') // Default color
         .style("color", "white");
 });
 
