@@ -197,12 +197,41 @@ function filterDeaths() {
                 .attr("cy", d => yScale(d.bmi))
                 .attr("r", 5)
                 .attr("fill", d => d.causeOfDeath === "0" ? "steelblue" : "red")
-                .style("fill-opacity", 0.7),
+                .style("fill-opacity", 0.7)
+                .on("mouseenter", function (event, d) {  // ✅ Tooltip on hover
+                    if (!isBrushEnabled) {
+                        d3.select(event.currentTarget).style("fill-opacity", 1);
+                        updateTooltipContent(d);
+                        updateTooltipVisibility(true);
+                        updateTooltipPosition(event);
+                    }
+                })
+                .on("mouseleave", function () {  // ✅ Hide tooltip on mouse leave
+                    if (!isBrushEnabled) {
+                        d3.select(event.currentTarget).style("fill-opacity", 0.7);
+                        updateTooltipVisibility(false);
+                    }
+                }),
             update => update
-                .attr("fill", d => d.causeOfDeath === "0" ? "steelblue" : "red"),
+                .attr("fill", d => d.causeOfDeath === "0" ? "steelblue" : "red")
+                .on("mouseenter", function (event, d) {  // ✅ Ensure tooltips work on updates
+                    if (!isBrushEnabled) {
+                        d3.select(event.currentTarget).style("fill-opacity", 1);
+                        updateTooltipContent(d);
+                        updateTooltipVisibility(true);
+                        updateTooltipPosition(event);
+                    }
+                })
+                .on("mouseleave", function () { 
+                    if (!isBrushEnabled) {
+                        d3.select(event.currentTarget).style("fill-opacity", 0.7);
+                        updateTooltipVisibility(false);
+                    }
+                }),
             exit => exit.remove()
         );
 }
+
 
 // Attach event listeners to checkboxes
 document.getElementById("filter-all").addEventListener("change", filterDeaths);
