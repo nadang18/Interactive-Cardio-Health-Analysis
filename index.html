@@ -33,7 +33,7 @@
                     <span class="legend-dot red"></span> Death
                 </div>
                 <div class="legend-item">
-                    <span class="legend-dot blue"></span> Alive
+                    <span class="legend-dot steelblue"></span> Alive
                 </div>
                 <div class="legend-item">
                     <span class="legend-dot black"></span> Death (Brush Selected)
@@ -42,26 +42,27 @@
                     <span class="legend-dot purple"></span> Alive (Brush Selected)
                 </div>
             </div>
+            <!-- Flexbox Container for Buttons -->
+    <div class="button-container">
+        <button id="reset-zoom">🔍 Reset Zoom</button>
+        <button id="toggle-brush">🖌️ Enable Brush</button>
+    </div>
         </div>
-    
+
+        
         <div class="sidebar"> <!-- Sidebar for Filters (Now on the Right) -->
             <h2>Filter by Death Type</h2>
             <div class="filter-container">
-                <label><input type="checkbox" id="filter-all" checked> All</label>
+                <label><input type="checkbox" id="filter-all" checked> All </label>
                 <label><input type="checkbox" id="filter-non-cardiac-death"> Non-cardiac death</label>
                 <label><input type="checkbox" id="filter-scd"> SCD (Sudden Cardiac Death)</label>
                 <label><input type="checkbox" id="filter-pfd"> Pump-failure death</label>
             </div>
         </div>
+        
     </div>
     
     
-
-    <!-- Flexbox Container for Buttons -->
-    <div class="button-container">
-        <button id="reset-zoom">🔍 Reset Zoom</button>
-        <button id="toggle-brush">🖌️ Enable Brush</button>
-    </div>
 
     <div id="stats"></div>
     <dl id="language-breakdown"></dl>

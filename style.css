@@ -201,77 +201,62 @@ circle.selected {
   fill: #ff6b6b;
 } */
 
+
 /* Filter Input & Button Container */
 .filter-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Reduced spacing for compact layout */
-    align-items: center;
-    justify-content: center;
-    margin-top: 15px; /* Slightly reduced */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  gap: 5px; /* Reduce excessive space */
+  align-items: flex-start; /* Align labels and inputs to the left */
+  height: auto;
+  margin-top: 10px; /* Slightly reduced */
 }
 
-/* Label Styling (Same Font as Everything Else) */
+/* Label Styling */
 .filter-container label {
-    font-family: 'Open Sans', sans-serif; /* Ensure consistency */
-    font-size: 1vw; /* Match other text sizes */
-    font-weight: bold;
-    color: #2c3e50;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem; /* Use a fixed size for consistency */
+  font-weight: bold;
+  color: #2c3e50;
+  display: flex;
+  align-items: center; /* Align checkboxes and text */
+  gap: 5px; /* Space between checkbox and text */
 }
 
-/* Input Styling */
-.filter-container input {
-    width: 70px; /* Slightly smaller */
-    padding: 4px; /* Reduced padding */
-    font-size: 0.9vw; /* Slightly smaller text */
-    border: 2px solid #90CAF9; /* Lighter Blue */
-    border-radius: 5px;
-    text-align: center;
-    outline: none;
-    background-color: #E3F2FD; /* Very light blue background */
-    color: #1565C0; /* Darker blue text for contrast */
+/* Checkbox Styling */
+.filter-container input[type="checkbox"] {
+  width: 16px; /* Standard checkbox size */
+  height: 16px;
+  accent-color: #64B5F6; /* Match theme */
+  cursor: pointer;
 }
 
-.filter-container input:focus {
-    border-color: #64B5F6; /* Slightly darker blue when focused */
-    background-color: #BBDEFB; /* Soft highlight effect */
-}
-
-/* Button Styling (Slightly Smaller) */
+/* Button Styling */
 .filter-container button {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 0.9vw; /* Reduced size */
-    padding: 5px 10px; /* Smaller padding */
-    border: none;
-    background-color: #64B5F6; /* Lighter Blue */
-    color: white;
-    cursor: pointer;
-    border-radius: 6px; /* Slightly reduced border radius */
-    transition: background-color 0.3s ease, transform 0.2s;
-    font-weight: bold;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  padding: 8px 12px; /* Adjusted for better clickability */
+  border: none;
+  background-color: #64B5F6;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.2s;
+  font-weight: bold;
 }
 
 .filter-container button:hover {
-    background-color: #42A5F5; /* Slightly darker blue on hover */
-    transform: scale(1.05);
+  background-color: #42A5F5;
+  transform: scale(1.05); /* Slight scale-up on hover */
 }
 
-/* Main Container (Flexbox Layout) */
+/* General Container Styling */
 .container {
   display: flex;
-  flex-direction: row;  /* Horizontal layout */
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  padding: 20px;
-}
-
-/* Chart and Legend Container */
-.chart-legend-container {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  flex-grow: 1; /* Allow chart to take available space */
+  justify-content: space-between; /* Distribute content */
+  gap: 20px;
+  padding: 20px;
 }
 
 /* Sidebar (Filter Section) */
@@ -282,6 +267,8 @@ circle.selected {
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   text-align: left; /* Align text to the left */
+  max-height: 350px; /* Adjust height as needed */
+  overflow: hidden; /* Prevents excessive height */
 }
 
 /* Filter Items (Stack Vertically) */
@@ -290,30 +277,47 @@ circle.selected {
   flex-direction: column; /* Vertical layout */
   gap: 10px;
 }
+/* Chart and Legend Container */
+.chart-legend-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers items horizontally */
+  justify-content: center; /* Centers items vertically if needed */
+  flex-grow: 1; /* Allow chart to take available space */
+  width: 100%; /* Ensure full width for centering */
+}
 
 /* Legend Styling */
 .legend-container {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: center; /* Centers content */
   gap: 15px;
   margin-top: 10px;
   padding: 10px;
   background: white;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  width: fit-content; /* Ensure it only takes necessary space */
+  margin-left: auto; /* Centering trick */
+  margin-right: auto; /* Centering trick */
 }
 
+/* Legend Title */
 .legend-title {
   font-weight: bold;
   margin-bottom: 5px;
+  text-align: center;
 }
 
+/* Legend Items */
 .legend-item {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
+/* Legend Dots */
 .legend-dot {
   width: 15px;
   height: 15px;
@@ -321,8 +325,9 @@ circle.selected {
   display: inline-block;
 }
 
+/* Color Definitions */
 .red { background-color: red; }
-.blue { background-color: blue; }
+.steelblue { background-color: steelblue; }
 .black { background-color: black; }
 .purple { background-color: purple; }
 
@@ -332,4 +337,8 @@ circle.selected {
   border-radius: 8px; /* Rounded corners */
   background: #f9f9f9; /* Slightly off-white background */
   margin: 15px 0; /* Add some spacing */
+}
+
+h2 {
+  margin-top: -10px;
 }
