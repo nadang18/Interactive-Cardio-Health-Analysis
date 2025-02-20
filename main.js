@@ -149,7 +149,7 @@ function createScatterplot() {
         .attr("text-anchor", "middle")
         .attr("font-size", "16px")
         .attr("fill", "black")
-        .text("Alcohol Consumption (Standard Units)");
+        .text("Normalized Alcohol Consumption (Standard Units)");
 }
 function updateScatterplot(filteredData = data) {
     dots.selectAll("circle")
