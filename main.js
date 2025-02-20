@@ -7,7 +7,6 @@ let dots;
 let svg;
 let brush;
 let zoom;
-let selectedYAxis = "alcohol"; // Default Y-Axis
 
 async function loadData() {
     data = await d3.csv('data/merged_subject_info.csv', (row) => ({
@@ -151,26 +150,14 @@ function createScatterplot() {
         .attr("font-size", "16px")
         .attr("fill", "black")
         .text("Alcohol Consumption (Standard Units)");
-    
 }
 function updateScatterplot(filteredData = data) {
-    // 🔹 Update Y-axis Scale based on the selected factor
-    yScale.domain(d3.extent(filteredData, d => isNaN(d[selectedYAxis]) ? undefined : d[selectedYAxis]))
-        .range([height - margin.bottom, margin.top])
-        .nice();
-
-    svg.select(".y-axis")
-        .transition()
-        .duration(750)
-        .call(d3.axisLeft(yScale));
-
-    // 🔹 Update dots with the new Y-axis value
     dots.selectAll("circle")
         .data(filteredData, d => d.age)
         .join(
             enter => enter.append("circle")
                 .attr("cx", d => xScale(d.age))
-                .attr("cy", d => yScale(d[selectedYAxis])) // ✅ Dynamic Y-axis
+                .attr("cy", d => yScale(d.bmi))
                 .attr("r", 5)
                 .attr("fill", d => d.survival === "Survivor" ? "cyan" :
                                  (d.survival === "Non-cardiac death" || 
@@ -178,21 +165,13 @@ function updateScatterplot(filteredData = data) {
                                   d.survival === "Pump-failure death") ? "orange" : "gray")
                 .style("fill-opacity", 0.7),
             update => update
-                .transition().duration(750) // Smooth transition when changing Y-axis
-                .attr("cy", d => yScale(d[selectedYAxis]))
                 .attr("fill", d => d.survival === "Survivor" ? "cyan" :
                                  (d.survival === "Non-cardiac death" || 
                                   d.survival === "SCD (Sudden Cardiac Death)" ||
                                   d.survival === "Pump-failure death") ? "orange" : "gray"),
             exit => exit.remove()
         );
-
-    // 🔹 Update Y-axis Label
-    svg.select(".y-axis-label")
-        .transition().duration(750)
-        .text(selectedYAxis.charAt(0).toUpperCase() + selectedYAxis.slice(1)); // Capitalize label
 }
-
 
 function filterDeaths() {
     const selectedType = document.getElementById("death-filter").value;
@@ -212,10 +191,10 @@ function filterDeaths() {
                 .attr("cx", d => xScale(d.age))
                 .attr("cy", d => yScale(d.bmi))
                 .attr("r", 5)
-                .attr("fill", "red") // 🔹 Keep only filtered deaths in purple
+                .attr("fill", "purple") // 🔹 Keep only filtered deaths in purple
                 .style("fill-opacity", 0.7),
             update => update
-                .attr("fill", "red"),
+                .attr("fill", "purple"),
             exit => exit.remove() // 🔹 Remove survivors from the plot
         );
 }
@@ -298,8 +277,11 @@ function toggleBrush() {
         // Re-enable zoom functionality
         svg.call(zoom);
 
-        // Reset circle colors by removing the 'selected' class
-        d3.selectAll("circle").classed("selected", false);
+        // Reset circle colors by removing the 'selected' class and resetting colors
+        d3.selectAll("circle").classed("selected", false)
+            .classed("brushed-survivor", false)
+            .classed("brushed-death", false)
+            .attr("fill", d => d.causeOfDeath === "0" ? "steelblue" : "red");
 
         button.textContent = "🖌️ Enable Brush";
         button.style.backgroundColor = '#64B5F6'; // Light blue
@@ -323,6 +305,7 @@ function toggleBrush() {
 
     isBrushEnabled = !isBrushEnabled;
 }
+
 function enableZoom() {
     svg.call(zoom);
     svg.select(".brush").remove();
@@ -399,3 +382,5 @@ function updateScatterplot(filteredData = data) {
 
 // Attach event listener to filter dropdown
 document.getElementById("death-filter").addEventListener("change", filterDeaths);
+
+
