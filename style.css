@@ -55,8 +55,10 @@ p {
 /* Larger Margin Text */
 .large-margin-top {
     margin-top: 10px;
-    font-weight: 700;
+    font-weight: 400;
     color: #2c3e50;
+    text-align: center;
+    font-size: 0.9vw;
 }
 
 /* Chart Container */
@@ -337,4 +339,10 @@ label[for="death-filter"], #death-filter {
 #death-filter:focus {
   border-color: #64B5F6; /* Slightly darker blue when focused */
   background-color: #BBDEFB; /* Soft highlight effect */
+}
+
+.line-break::after {
+  content: "";
+  display: block;
+  margin-bottom: 1em; /* Adjusts the space between lines */
 }
