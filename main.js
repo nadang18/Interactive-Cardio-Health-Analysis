@@ -217,6 +217,23 @@ function updateSelection() {
     d3.selectAll('circle').classed('selected', (d) => isCommitSelected(d));
   }
 
+function updateSelectionCount() {
+    const selectedDots = d3.selectAll('circle.selected').data();
+
+    if (selectedDots.length === 0) {
+        document.getElementById('selection-count').textContent = 'No dots selected';
+        return;
+    }
+
+    const count = selectedDots.length;
+    const ages = selectedDots.map(d => d.age).sort((a, b) => a - b);
+    const medianAge = ages[Math.floor(ages.length / 2)];
+    const averageAlcohol = (selectedDots.reduce((sum, d) => sum + d.bmi, 0) / count).toFixed(2);
+
+    document.getElementById('selection-count').textContent = 
+        `Selected: ${count}, Median Age: ${medianAge}, Avg Alcohol Consumption: ${averageAlcohol}`;
+}
+
 function brushed(event) {
     brushSelection = event.selection;
     
@@ -226,6 +243,7 @@ function brushed(event) {
             .classed("brushed-survivor", false)
             .classed("brushed-death", false)
             .attr("fill", d => d.causeOfDeath === "0" ? "steelblue" : "red"); // Reset colors
+        updateSelectionCount();
         return;
     }
 
@@ -290,6 +308,9 @@ function toggleBrush() {
         svg.style.cursor = "default";
         d3.selectAll("circle").style("pointer-events", "auto");
         document.body.style.cursor = "default";
+
+        // Reset selection count text
+        document.getElementById('selection-count').textContent = 'No dots selected';
     } else {
         svg.append("g").attr("class", "brush").call(brush);
         svg.on(".zoom", null); // Disable zoom when brushing
