@@ -66,9 +66,9 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90%;
-  height: 60vh;
-  max-width: 1000px;
+  width: 130%;
+  height: 80vh;
+  max-width: 1200px;
 }
 
 /* Flexbox Container for Buttons */
@@ -150,14 +150,14 @@ circle.brushed-death {
 
 /* Axis Styling */
 .x-axis text, .y-axis text {
-    font-size: 1.2vw;
+    font-size: 1vw;
     font-family: 'Open Sans', sans-serif;
     fill: #2c3e50;
 }
 
 #selection-count {
-    font-size: 1.4vw;
-    font-weight: 700;
+    font-size: 1.1vw;
+    font-weight: 600;
     color: #2c3e50;
     text-align: center;
     margin: 20px 0 10px; /* Adds spacing above and below */

@@ -405,3 +405,24 @@ function updateScatterplot(filteredData = data) {
 document.getElementById("death-filter").addEventListener("change", filterDeaths);
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    const deathFilter = document.getElementById('death-filter');
+
+    // Event listener for when the dropdown value changes
+    deathFilter.addEventListener('change', () => {
+        // Reset background color to light blue after selection
+        deathFilter.style.backgroundColor = '#E3F2FD';
+    });
+
+    // Event listener for when the dropdown gains focus
+    deathFilter.addEventListener('focus', () => {
+        // Change background color to a slightly darker blue when focused
+        deathFilter.style.backgroundColor = '#BBDEFB';
+    });
+
+    // Event listener for when the dropdown loses focus
+    deathFilter.addEventListener('blur', () => {
+        // Reset background color to light blue when focus is lost
+        deathFilter.style.backgroundColor = '#E3F2FD';
+    });
+});
