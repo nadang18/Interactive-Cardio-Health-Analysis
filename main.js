@@ -174,30 +174,41 @@ function updateScatterplot(filteredData = data) {
 }
 
 function filterDeaths() {
-    const selectedType = document.getElementById("death-filter").value;
+    const showAll = document.getElementById("filter-all").checked;
+    const showNonCardiacDeath = document.getElementById("filter-non-cardiac-death").checked;
+    const showSCD = document.getElementById("filter-scd").checked;
+    const showPFD = document.getElementById("filter-pfd").checked;
 
-    if (selectedType === "All") {
-        createScatterplot();; // 🔹 Reset to full scatterplot (including survivors)
-        return;
+    let filteredData = data;
+
+    if (!showAll) {
+        filteredData = data.filter(d => 
+            (showNonCardiacDeath && d.survival === "Non-cardiac death") ||
+            (showSCD && d.survival === "SCD (Sudden Cardiac Death)") ||
+            (showPFD && d.survival === "Pump-failure death")
+        );
     }
 
-    // Filter only selected death type (remove Survivors)
-    const filteredData = data.filter(d => d.survival !== "Survivor" && d.survival === selectedType);
-
     dots.selectAll("circle")
-        .data(filteredData, d => d.age) // Bind only the filtered data (no survivors)
+        .data(filteredData, d => d.age)
         .join(
             enter => enter.append("circle")
                 .attr("cx", d => xScale(d.age))
                 .attr("cy", d => yScale(d.bmi))
                 .attr("r", 5)
-                .attr("fill", "red") // 🔹 Keep only filtered deaths in purple
+                .attr("fill", d => d.causeOfDeath === "0" ? "steelblue" : "red")
                 .style("fill-opacity", 0.7),
             update => update
-                .attr("fill", "red"),
-            exit => exit.remove() // 🔹 Remove survivors from the plot
+                .attr("fill", d => d.causeOfDeath === "0" ? "steelblue" : "red"),
+            exit => exit.remove()
         );
 }
+
+// Attach event listeners to checkboxes
+document.getElementById("filter-all").addEventListener("change", filterDeaths);
+document.getElementById("filter-non-cardiac-death").addEventListener("change", filterDeaths);
+document.getElementById("filter-scd").addEventListener("change", filterDeaths);
+document.getElementById("filter-pfd").addEventListener("change", filterDeaths);
 
 function zoomed(event) {
     const transform = event.transform;

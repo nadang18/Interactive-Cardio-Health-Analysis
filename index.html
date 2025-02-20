@@ -24,15 +24,15 @@
         </ul>
     </section>
 
-    <section class="filter-section">
-        <label for="death-filter"><strong>Select Death Type:</strong></label>
-        <select id="death-filter">
-            <option value="All">All</option>
-            <option value="Non-cardiac death">Non-cardiac death</option>
-            <option value="SCD (Sudden Cardiac Death)">SCD (Sudden Cardiac Death)</option>
-            <option value="Pump-failure death">Pump-failure death</option>
-        </select>
-    </section>
+    <div class="sidebar">
+        <h2>Filter by Death Type</h2>
+        <div class="filter-container">
+            <label><input type="checkbox" id="filter-all" checked> All</label>
+            <label><input type="checkbox" id="filter-non-cardiac-death"> Non-cardiac death</label>
+            <label><input type="checkbox" id="filter-scd"> SCD (Sudden Cardiac Death)</label>
+            <label><input type="checkbox" id="filter-pfd"> Pump-failure death</label>
+        </div>
+    </div>
 
     <div id="selection-count">No dots selected</div>
 
@@ -40,18 +40,18 @@
         <div id="chart"></div>
         <div class="legend-container">
             <div class="legend-title">Legend</div>
-        <div class="legend-item">
-            <span class="legend-dot red"></span> Death
-        </div>
-        <div class="legend-item">
-            <span class="legend-dot blue"></span> Alive
-        </div>
-        <div class="legend-item">
-            <span class="legend-dot black"></span> Death (Brush Selected)
-        </div>
-        <div class="legend-item">
-            <span class="legend-dot purple"></span> Alive (Brush Selected)
-        </div>
+            <div class="legend-item">
+                <span class="legend-dot red"></span> Death
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot blue"></span> Alive
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot black"></span> Death (Brush Selected)
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot purple"></span> Alive (Brush Selected)
+            </div>
         </div>
     </div>
 
