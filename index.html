@@ -23,6 +23,19 @@
         <span class="line-break"></span>
         Scroll in or out to zoom through the scatter plot.
     </div>
+
+    <label for="death-filter">Select Death Type:</label>
+    <select id="death-filter">
+        <option value="All">All</option>
+        <option value="Non-cardiac death">Non-cardiac death</option>
+        <option value="SCD (Sudden Cardiac Death)">SCD (Sudden Cardiac Death)</option>
+        <option value="Pump-failure death">Pump-failure death</option>
+    </select>
+
+    <div id="selection-count">No dots selected</div>
+
+
+
     <div class="chart-legend-container">
         <div id="chart"></div>
         <div class="legend-container">
@@ -41,18 +54,6 @@
         </div>
         </div>
     </div>
-    
-
-    
-    <label for="death-filter">Select Death Type:</label>
-    <select id="death-filter">
-        <option value="All">All</option>
-        <option value="Non-cardiac death">Non-cardiac death</option>
-        <option value="SCD (Sudden Cardiac Death)">SCD (Sudden Cardiac Death)</option>
-        <option value="Pump-failure death">Pump-failure death</option>
-    </select>
-
-    <div id="selection-count">No dots selected</div>
 
     <!-- Flexbox Container for Buttons -->
     <div class="button-container">
