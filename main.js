@@ -217,12 +217,15 @@ function updateSelection() {
     d3.selectAll('circle').classed('selected', (d) => isCommitSelected(d));
   }
 
-  function brushed(event) {
+function brushed(event) {
     brushSelection = event.selection;
     
     if (!brushSelection) {
         // If no selection, reset all circles
-        dots.selectAll("circle").classed("selected", false);
+        dots.selectAll("circle").classed("selected", false)
+            .classed("brushed-survivor", false)
+            .classed("brushed-death", false)
+            .attr("fill", d => d.causeOfDeath === "0" ? "steelblue" : "red"); // Reset colors
         return;
     }
 
@@ -232,6 +235,14 @@ function updateSelection() {
         const cx = xScale(d.age);
         const cy = yScale(d.bmi);
         return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1;
+    }).classed("brushed-survivor", d => {
+        const cx = xScale(d.age);
+        const cy = yScale(d.bmi);
+        return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1 && d.causeOfDeath === "0";
+    }).classed("brushed-death", d => {
+        const cx = xScale(d.age);
+        const cy = yScale(d.bmi);
+        return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1 && d.causeOfDeath !== "0";
     });
 
     updateSelectionCount();

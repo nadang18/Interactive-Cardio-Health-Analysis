@@ -138,6 +138,14 @@ circle:hover {
   stroke-width: 1px;
 }
 
+circle.brushed-survivor {
+  fill: purple;
+}
+
+circle.brushed-death {
+  fill: black;
+}
+
 /* Axis Styling */
 .x-axis text, .y-axis text {
     font-size: 1.2vw;
@@ -191,10 +199,10 @@ circle:hover {
   stroke-dasharray: 5 3;
   animation: marching-ants 2s linear infinite;
 }
-
+/* 
 circle.selected {
   fill: #ff6b6b;
-}
+} */
 
 /* Filter Input & Button Container */
 .filter-container {
