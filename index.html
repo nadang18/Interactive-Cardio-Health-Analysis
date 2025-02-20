@@ -8,33 +8,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="title-container">
-        <h1>Cardiovascular Health: Risk Factors Assessment Analysis</h1>
-    </div>
+    <header class="title-container">
+        <h1>Alcohol Consumption & Cardiac Risk: Insights from the MUSIC Study</h1>
+    </header>
     
-    <p class="italic-text">The MUSIC (MUerte Subita en Insuficiencia Cardiaca) study was a research project aimed at identifying risk predictors for cardiac mortality and sudden cardiac death (SCD) in chronic heart failure (CHF) patients.
-        Displayed below are record of patients from heart clinics within the University Spanish Hospital.
+    <p class="italic-text">The <strong>MUSIC</strong> (<em>MUerte Subita en Insuficiencia Cardiaca</em>) study investigates key risk factors for cardiac mortality and sudden cardiac death (SCD) in chronic heart failure (CHF) patients. The visualization below explores the relationship between alcohol consumption levels, survival outcomes, and patient demographics from heart clinics at the University Spanish Hospital.
     </p>
 
-    <div class="large-margin-top">
-        Select the different types of death below to see different distributions of deaths as relations to alcohol consumption.
-        <span class="line-break"></span>
-        Use the brush tool below to select groups of individuals to see a breakdown.
-        <span class="line-break"></span>
-        Scroll in or out to zoom through the scatter plot.
-    </div>
+    <section class="interaction-instructions">
+        <p style="text-align: center;">🔍 <strong>Interact with the data:</strong></p>
+        <ul>
+            <li>Select different types of death to explore their distribution across alcohol consumption levels.</li>
+            <li>Use the brush tool to highlight specific groups for a detailed breakdown.</li>
+            <li>Zoom in and out to navigate the scatter plot with ease.</li>
+        </ul>
+    </section>
 
-    <label for="death-filter">Select Death Type:</label>
-    <select id="death-filter">
-        <option value="All">All</option>
-        <option value="Non-cardiac death">Non-cardiac death</option>
-        <option value="SCD (Sudden Cardiac Death)">SCD (Sudden Cardiac Death)</option>
-        <option value="Pump-failure death">Pump-failure death</option>
-    </select>
+    <section class="filter-section">
+        <label for="death-filter"><strong>Select Death Type:</strong></label>
+        <select id="death-filter">
+            <option value="All">All</option>
+            <option value="Non-cardiac death">Non-cardiac death</option>
+            <option value="SCD (Sudden Cardiac Death)">SCD (Sudden Cardiac Death)</option>
+            <option value="Pump-failure death">Pump-failure death</option>
+        </select>
+    </section>
 
     <div id="selection-count">No dots selected</div>
-
-
 
     <div class="chart-legend-container">
         <div id="chart"></div>
