@@ -271,8 +271,8 @@ circle.selected {
   border-radius: 6px;
   background-color: white;
   position: absolute;
-  top: 780px; /* Adjust for positioning */
-  right: 10%; /* Align to the right of the text */
+  top: 760px; /* Adjust for positioning */
+  right: 16%; /* Align to the right of the text */
 }
 
 /* Legend Title */
