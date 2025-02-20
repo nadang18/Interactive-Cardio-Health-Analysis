@@ -304,3 +304,27 @@ circle.selected {
 .legend-dot.blue {
   background-color: steelblue;
 }
+
+/* Apply consistent font and size */
+label[for="death-filter"], #death-filter {
+  font-family: 'Lekton', sans-serif; /* Matches the page's font */
+  font-size: 0.9vw; /* Slightly smaller font size */
+  font-weight: bold;
+  color: #2c3e50; /* Dark gray color for text */
+}
+
+/* Style the dropdown menu */
+#death-filter {
+  padding: 4px; /* Reduced padding for a compact look */
+  border: 2px solid #90CAF9; /* Light blue border */
+  border-radius: 5px;
+  background-color: #E3F2FD; /* Very light blue background */
+  color: #1565C0; /* Darker blue text for contrast */
+  outline: none; /* Remove default outline */
+}
+
+/* Change background color on focus */
+#death-filter:focus {
+  border-color: #64B5F6; /* Slightly darker blue when focused */
+  background-color: #BBDEFB; /* Soft highlight effect */
+}
