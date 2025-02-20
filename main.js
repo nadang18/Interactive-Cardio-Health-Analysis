@@ -379,10 +379,12 @@ function updateTooltipContent(d) {
 
 function updateTooltipPosition(event) {
     const tooltip = document.getElementById('tooltip');
-    tooltip.style.left = `${event.clientX}px`;
-    tooltip.style.top = `${event.clientY}px`;
-}
+    const offsetX = 20; // Keeps it slightly to the right
+    const offsetY = 20; // Adjust this value to lower the tooltip closer to the cursor
 
+    tooltip.style.left = `${event.clientX + offsetX}px`;
+    tooltip.style.top = `${event.clientY + offsetY}px`;
+}
 function updateTooltipVisibility(isVisible) {
     document.getElementById('tooltip').hidden = !isVisible;
 }
