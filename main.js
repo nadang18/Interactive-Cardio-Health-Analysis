@@ -404,12 +404,32 @@ function updateTooltipContent(d) {
 
 function updateTooltipPosition(event) {
     const tooltip = document.getElementById('tooltip');
-    const offsetX = 20; // Keeps it slightly to the right
-    const offsetY = 20; // Adjust this value to lower the tooltip closer to the cursor
+    const offsetX = 15; // Adjusts horizontal position to the right
+    const offsetY = 10; // Adjusts vertical position closer to cursor
 
-    tooltip.style.left = `${event.clientX + offsetX}px`;
-    tooltip.style.top = `${event.clientY + offsetY}px`;
+    let tooltipX = event.pageX + offsetX;
+    let tooltipY = event.pageY + offsetY;
+
+    // Ensure tooltip stays within viewport boundaries
+    const tooltipWidth = tooltip.offsetWidth;
+    const tooltipHeight = tooltip.offsetHeight;
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // Adjust if tooltip exceeds right edge of the screen
+    if (tooltipX + tooltipWidth > windowWidth) {
+        tooltipX = event.pageX - tooltipWidth - offsetX;
+    }
+
+    // Adjust if tooltip exceeds bottom edge of the screen
+    if (tooltipY + tooltipHeight > windowHeight) {
+        tooltipY = event.pageY - tooltipHeight - offsetY;
+    }
+
+    tooltip.style.left = `${tooltipX}px`;
+    tooltip.style.top = `${tooltipY}px`;
 }
+
 function updateTooltipVisibility(isVisible) {
     document.getElementById('tooltip').hidden = !isVisible;
 }
