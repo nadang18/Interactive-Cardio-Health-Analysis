@@ -326,3 +326,10 @@ circle.selected {
 .black { background-color: black; }
 .purple { background-color: purple; }
 
+.interaction-instructions {
+  border: 2px solid #d3d3d3; /* Light gray border */
+  padding: 15px; /* Add some padding inside */
+  border-radius: 8px; /* Rounded corners */
+  background: #f9f9f9; /* Slightly off-white background */
+  margin: 15px 0; /* Add some spacing */
+}
