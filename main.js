@@ -191,10 +191,10 @@ function filterDeaths() {
                 .attr("cx", d => xScale(d.age))
                 .attr("cy", d => yScale(d.bmi))
                 .attr("r", 5)
-                .attr("fill", "purple") // 🔹 Keep only filtered deaths in purple
+                .attr("fill", "red") // 🔹 Keep only filtered deaths in purple
                 .style("fill-opacity", 0.7),
             update => update
-                .attr("fill", "purple"),
+                .attr("fill", "red"),
             exit => exit.remove() // 🔹 Remove survivors from the plot
         );
 }
