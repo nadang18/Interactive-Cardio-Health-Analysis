@@ -81,8 +81,8 @@ p {
 /* Button Styling */
 button {
   font-family: 'Lekton', sans-serif;
-  font-size: 1.2vw;
-  padding: 10px 15px;
+  font-size: 1.2vw; /* Uniform font size */
+  padding: 10px 20px; /* Ensure same padding for all buttons */
   border: none;
   color: white;
   cursor: pointer;
@@ -92,27 +92,17 @@ button {
   align-items: center;
   gap: 8px;
   font-weight: bold;
+  margin-top: 20px;
 }
 
 /* Reset Zoom (Mustard Yellow) */
 #reset-zoom {
-    background-color: #FFC107; /* Mustard Yellow */
-    color: black; /* High contrast text */
-  }
-  
-#reset-zoom:hover {
-    background-color: #E0A800; /* Darker mustard yellow */
-    transform: scale(1.05);
-  }
-
-
-/* Enable Brush (Purple) */
-#enable-brush {
-  background-color: #3498db;
+  background-color: #FFC107; /* Mustard Yellow */
+  color: black;
 }
 
-#enable-brush:hover {
-  background-color: #2980b9;
+#reset-zoom:hover {
+  background-color: #E0A800;
   transform: scale(1.05);
 }
 
