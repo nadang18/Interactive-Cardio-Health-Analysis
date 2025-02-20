@@ -232,6 +232,31 @@ function filterDeaths() {
         );
 }
 
+document.getElementById("filter-all").addEventListener("change", function () {
+    if (this.checked) {
+        // Deselect other checkboxes when "All" is selected
+        document.getElementById("filter-non-cardiac-death").checked = false;
+        document.getElementById("filter-scd").checked = false;
+        document.getElementById("filter-pfd").checked = false;
+    }
+    filterDeaths();
+});
+// Function to handle individual checkbox selections
+function handleSpecificFilterChange() {
+    // Deselect "All" checkbox when any specific filter is selected
+    document.getElementById("filter-all").checked = false;
+    filterDeaths();
+}
+
+// Attach event listeners to individual filters
+document.getElementById("filter-non-cardiac-death").addEventListener("change", handleSpecificFilterChange);
+document.getElementById("filter-scd").addEventListener("change", handleSpecificFilterChange);
+document.getElementById("filter-pfd").addEventListener("change", handleSpecificFilterChange);
+
+
+document.getElementById("filter-non-cardiac-death").addEventListener("change", filterDeaths);
+document.getElementById("filter-scd").addEventListener("change", filterDeaths);
+document.getElementById("filter-pfd").addEventListener("change", filterDeaths);
 
 // Attach event listeners to checkboxes
 document.getElementById("filter-all").addEventListener("change", filterDeaths);
