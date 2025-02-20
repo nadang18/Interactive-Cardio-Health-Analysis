@@ -54,7 +54,7 @@ p {
 
 /* Larger Margin Text */
 .large-margin-top {
-    margin-top: 40px;
+    margin-top: 10px;
     font-weight: 700;
     color: #2c3e50;
 }
@@ -319,6 +319,7 @@ label[for="death-filter"], #death-filter {
   font-size: 0.9vw; /* Slightly smaller font size */
   font-weight: bold;
   color: #2c3e50; /* Dark gray color for text */
+  margin-top: 15px;
 }
 
 /* Style the dropdown menu */
@@ -328,7 +329,8 @@ label[for="death-filter"], #death-filter {
   border-radius: 5px;
   background-color: #E3F2FD; /* Very light blue background */
   color: #1565C0; /* Darker blue text for contrast */
-  outline: none; /* Remove default outline */
+  outline: none;
+  margin-top: 5px; /* Remove default outline */
 }
 
 /* Change background color on focus */
