@@ -12,7 +12,7 @@ async function loadData() {
     data = await d3.csv('data/merged_subject_info.csv', (row) => ({
         ...row,
         age: Number(row.Age),
-        bmi: Number(row['alcohol consumption (standard units)']),
+        bmi: Number(row['normalized alcohol consumption (standard units)']),
         datetime: new Date(row.datetime),
         causeOfDeath: row['Cause of death'],
         survival: row['Cause of death'] === "0" ? 'Survivor' :
