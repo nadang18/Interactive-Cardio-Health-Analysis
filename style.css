@@ -256,54 +256,64 @@ circle.selected {
     transform: scale(1.05);
 }
 
+/* Main Container (Flexbox Layout) */
+.container {
+  display: flex;
+  flex-direction: row;  /* Horizontal layout */
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Chart and Legend Container */
 .chart-legend-container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 20px; /* Adjusts space between chart and legend */
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1; /* Allow chart to take available space */
 }
 
+/* Sidebar (Filter Section) */
+.sidebar {
+  width: 150px; /* Set a fixed width */
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: left; /* Align text to the left */
+}
+
+/* Filter Items (Stack Vertically) */
+.filter-container {
+  display: flex;
+  flex-direction: column; /* Vertical layout */
+  gap: 10px;
+}
+
+/* Legend Styling */
 .legend-container {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  flex: 0 1 200px;
-  min-width: 150px;
-  align-items: flex-start;
-  gap: 8px;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
   padding: 10px;
-  border: 1px solid grey; /* Thin grey border */
-  border-radius: 6px;
-  background-color: white;
-  position: absolute;
-  top: 600px; /* Adjust for positioning */
-  right: 8%; /* Align to the right of the text */
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Legend Title */
 .legend-title {
-  font-size: 1.1vw;
   font-weight: bold;
-  color: #2c3e50;
-  text-align: center;
   margin-bottom: 5px;
-  border-bottom: 1px solid grey; /* Subtle separator */
-  padding-bottom: 3px;
-  width: 100%;
 }
 
-/* Legend Items */
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1vw;
-  font-weight: bold;
-  color: #2c3e50;
+  gap: 5px;
 }
 
-/* Colored Dots */
 .legend-dot {
   width: 15px;
   height: 15px;
@@ -311,72 +321,8 @@ circle.selected {
   display: inline-block;
 }
 
-/* Red Dot = Death */
-.legend-dot.red {
-  background-color: red;
-}
+.red { background-color: red; }
+.blue { background-color: blue; }
+.black { background-color: black; }
+.purple { background-color: purple; }
 
-/* Blue Dot = Alive */
-.legend-dot.blue {
-  background-color: steelblue;
-}
-
-.legend-dot.black { background-color: black; }
-.legend-dot.purple { background-color: purple; }
-/* Apply consistent font and size */
-label[for="death-filter"], #death-filter {
-  font-family: 'Open Sans', sans-serif; /* Matches the page's font */
-  font-size: 0.9vw; /* Slightly smaller font size */
-  font-weight: bold;
-  color: #2c3e50; /* Dark gray color for text */
-  margin-top: 15px;
-}
-
-/* Style the dropdown menu */
-#death-filter {
-  padding: 4px; /* Reduced padding for a compact look */
-  border: 2px solid #90CAF9; /* Light blue border */
-  border-radius: 5px;
-  background-color: #E3F2FD; /* Very light blue background */
-  color: #1565C0; /* Darker blue text for contrast */
-  outline: none;
-  margin-top: 5px; /* Remove default outline */
-}
-
-/* Change background color on focus */
-#death-filter:focus {
-  border-color: #64B5F6; /* Slightly darker blue when focused */
-  background-color: #BBDEFB; /* Soft highlight effect */
-}
-
-.line-break::after {
-  content: "";
-  display: block;
-  margin-bottom: 1em; /* Adjusts the space between lines */
-}
-
-.sidebar {
-    position: absolute;
-    top: 100px;
-    left: 20px;
-    width: 200px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar h2 {
-    font-size: 1.2vw;
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-.filter-container label {
-    display: block;
-    font-size: 1vw;
-    color: #2c3e50;
-    margin-bottom: 5px;
-}
