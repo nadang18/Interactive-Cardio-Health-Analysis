@@ -285,7 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
         button.style.backgroundColor = isBrushEnabled ? 'green' : '#64B5F6'; // Original colors
     });
 });
-
 function toggleBrush() {
     const button = document.getElementById('toggle-brush');
 
@@ -295,11 +294,10 @@ function toggleBrush() {
         // Re-enable zoom functionality
         svg.call(zoom);
 
-        // Reset circle colors by removing the 'selected' class and resetting colors
+        // Reset selection but **keep filtered colors**
         d3.selectAll("circle").classed("selected", false)
             .classed("brushed-survivor", false)
-            .classed("brushed-death", false)
-            .attr("fill", d => d.causeOfDeath === "0" ? "steelblue" : "red");
+            .classed("brushed-death", false);
 
         button.textContent = "🖌️ Enable Brush";
         button.style.backgroundColor = '#64B5F6'; // Light blue
@@ -327,15 +325,16 @@ function toggleBrush() {
     isBrushEnabled = !isBrushEnabled;
 }
 
+
 function enableZoom() {
     svg.call(zoom);
     svg.select(".brush").remove();
 }
 
 function updateTooltipContent(d) {
-    document.getElementById('tooltip-age').textContent = `${d.age}`;
-    document.getElementById('tooltip-bmi').textContent = `${d.bmi.toFixed(2)}`;
-    document.getElementById('tooltip-death').textContent = `${d.survival}`;
+    document.getElementById('tooltip-age').textContent = d.age ?? "N/A"; // Use "N/A" if undefined
+    document.getElementById('tooltip-bmi').textContent = d.bmi ? d.bmi.toFixed(2) : "N/A"; // Avoid NaN errors
+    document.getElementById('tooltip-death').textContent = d.survival ? d.survival : "Unknown"; // Handle missing survival data
 }
 
 function updateTooltipPosition(event) {
