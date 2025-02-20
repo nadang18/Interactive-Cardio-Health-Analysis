@@ -107,7 +107,7 @@ button {
 #tooltip {
     display: visible; /* Start as hidden */
     position: absolute;
-    background-color: rgba(250, 250, 250, 0.4);
+    background-color: rgba(250, 250, 250, 0.7);
     border: 1px solid black;
     padding: 10px;
     pointer-events: none;
